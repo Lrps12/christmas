@@ -4,28 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joyeux Noël !</title>
+    <title>Christmas Gift Surprise</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <h1>🎄 Joyeux Noël ! 🎁</h1>
-        <p>Tourne la roulette pour découvrir ton cadeau !</p>
+    <!-- Christmas Scene -->
+    <div class="scene">
+        <h1 class="title">
+            <span>🎄 Noyeux Joël 🎄</span>
+            <br />
+            <span style="font-size: 6rem;">Fanchyk'</span>
+        </h1>
 
-        <!-- Roulette -->
-        <canvas id="rouletteCanvas" width="500" height="500"></canvas>
-        <button id="spinButton">Tourner la roulette</button>
+        <!-- Gift Box -->
+        <div class="gift-container">
+            <div class="gift-box" id="giftBox">
+                <!-- Replace the gift-box div with the actual PNG gift image -->
+                <img src="./public/gift.png" alt="Christmas Gift" class="gift-image">
+            </div>
+            <p class="message"></p>
+        </div>
 
-        <!-- Révélation du cadeau -->
-        <div id="reveal" class="hidden">
-            <h2>🎉 Félicitations ! 🎉</h2>
-            <p>Tu as gagné une <strong>PlayStation 5</strong> !</p>
-            <img src="ps5.jpg" alt="PlayStation 5" class="prize-image">
+        <!-- Hidden Content -->
+        <div class="reveal hidden" id="reveal">
+            <img src="./public/ps5.png" alt="PS5" class="ps5-image">
+            <p class="message">Une p'tite ps5.......</p>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/winwheel@2.7.0/dist/winwheel.min.js"></script>
     <script src="script.js"></script>
 </body>
 
