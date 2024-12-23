@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Noël !</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎄 Joyeux Noël ! 🎁</h1>
+        <p>Tourne la roulette pour découvrir ton cadeau !</p>
+
+        <!-- Roulette -->
+        <canvas id="rouletteCanvas" width="500" height="500"></canvas>
+        <button id="spinButton">Tourner la roulette</button>
+
+        <!-- Révélation du cadeau -->
+        <div id="reveal" class="hidden">
+            <h2>🎉 Félicitations ! 🎉</h2>
+            <p>Tu as gagné une <strong>PlayStation 5</strong> !</p>
+            <img src="ps5.jpg" alt="PlayStation 5" class="prize-image">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/winwheel@2.7.0/dist/winwheel.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
