@@ -92,20 +92,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(createBeaverImage, 5000);
 
-    // Event listener for the gift box click to reveal the PS5
     const giftBox = document.getElementById('giftBox');
     const reveal = document.getElementById('reveal');
+    const message = document.querySelector('.message');
+
+    let step = 1; // Track the current step
+
+    const steps = [
+        {
+            image: './public/gift.png',
+            message: 'Clique sur ton cadeau, VITE',
+        },
+        {
+            image: './public/orange.png',
+            message: 'Pas ouf, tu peux recliquer',
+        },
+        {
+            image: './public/gift.png',
+            message: 'Allez go',
+        },
+        {
+            image: './public/paco.png',
+            message: 'Et nan, ça t\'as déjà un exemplaire, next',
+        },
+        {
+            image: './public/gift.png',
+            message: 'On enchaîne hop hop hop',
+        },
+        {
+            image: './public/jul.jpg',
+            message: 'Ah déso, la rencontre avec le J en personne ça sera pour une autre fois...',
+        },
+        {
+            image: './public/gift.png',
+            message: 'Bon on lâche rieng, celle là c\'est la bonne (et la dernière)',
+        },
+        {
+            image: './public/ps5.png',
+            message: 'Bon bah ça sera une p\'tite ps5....... si ça te va.......',
+        },
+    ];
+
+    const updateStage = () => {
+        const currentStep = steps[step - 1]; // Get the current step
+        if (currentStep) {
+            if (currentStep.image === './public/gift.png') {
+                // Show the gift box again
+                giftBox.classList.remove('hidden');
+                reveal.classList.add('hidden');
+                message.textContent = currentStep.message;
+            } else {
+                // Update the image and message for other steps
+                reveal.querySelector('img').src = currentStep.image;
+                message.textContent = currentStep.message;
+
+                // Hide the gift box and show the reveal
+                giftBox.classList.add('hidden');
+                reveal.classList.remove('hidden');
+            }
+        }
+    };
+
+    let isAnimating = false; // Track if an animation is ongoing
 
     giftBox.addEventListener('click', () => {
-        // Add shuffling animation to the gift box
-        giftBox.classList.add('shuffling');
+        if (isAnimating || step === steps.length) {
+            return; // Ignore clicks during animation or if no further steps
+        }
 
-        // After the animation completes (2s in this case), reveal the PS5
-        setTimeout(() => {
-            // Hide the gift box with the gift image
-            giftBox.classList.add('hidden');
-            // Show the PS5 image and message after the shuffle animation ends
-            reveal.classList.remove('hidden');
-        }, 2000); // Match the timeout with the animation duration
+        isAnimating = true; // Block additional clicks
+
+        if (step === steps.length - 1) {
+            // Apply the longer shuffle animation for the last step
+            giftBox.classList.add('shuffling-last');
+
+            setTimeout(() => {
+                giftBox.classList.remove('shuffling-last');
+                step++;
+                updateStage();
+                isAnimating = false; // Allow clicks again
+            }, 5000); // 5 seconds for the last animation
+        } else {
+            // Apply the regular shuffle animation
+            giftBox.classList.add('shuffling');
+
+            setTimeout(() => {
+                giftBox.classList.remove('shuffling');
+                step++;
+                updateStage();
+                isAnimating = false; // Allow clicks again
+            }, 2000); // Match the animation duration
+        }
     });
+
+    reveal.addEventListener('click', () => {
+        if (isAnimating || step === steps.length) {
+            return; // Ignore clicks during animation or if no further steps
+        }
+
+        isAnimating = true; // Block additional clicks
+
+        // Clear the message explicitly when switching steps
+        message.textContent = '';
+
+        step++;
+        updateStage();
+
+        // Trigger confetti animation if it's the last step
+
+        isAnimating = false; // Allow clicks again
+    });
+
+    // Initialize the first stage
+    updateStage();
 });
